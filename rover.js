@@ -19,13 +19,34 @@ class Rover {
   movements
 
   constructor(position, plateau, movements) {
-    this.currentLocation = {
-      x: parseInt(position.x),
-      y: parseInt(position.y)
-    } 
     this.currentHeading = position.heading 
     this.plateau = plateau
     this.movements = movements
+    
+    const { x, y } = this.adjustStartingPositionIfRequired(position)
+
+    this.currentLocation = {
+      x,
+      y
+    } 
+  }
+
+  adjustStartingPositionIfRequired(position) {
+    let x = parseInt(position.x)
+    let y = parseInt(position.y)
+
+    if (this.plateau.isOutOfBoundsForX(x)) {
+      x = this.plateau.width
+    }
+
+    if (this.plateau.isOutOfBoundsForY(y)) {
+      y = this.plateau.height
+    }
+
+    return {
+      x,
+      y
+    }
   }
 
   run() {

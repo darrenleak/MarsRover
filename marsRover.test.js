@@ -4,9 +4,14 @@ const testDataSpacesCleanup =
           1 2 N 
 LMLMLMLMM        
 3 3 E
-MMRMMRMRRM`
+MMRMMRMRRM
 
-test('Test default input: Dirty input - Spaces', () => {
+
+
+
+`
+
+test('Dirty input - Spaces', () => {
   const app = new App()
   let output = app.start(testDataSpacesCleanup)
 
@@ -21,7 +26,7 @@ lmlmlm
 3 3 E
 MMRMMRMRRM`
 
-test('Test default input: Dirty input - Bad characters', () => {
+test('Dirty input - Bad characters', () => {
   const app = new App()
 
   let output = app.start(testDataSpacesBadCharacters)
@@ -43,7 +48,7 @@ const plateauTwo = `5 3
 5 3 N
 MRMLMRMLMRMRMLM`
 
-test('Test default input: Dirty input - Spaces', () => {
+test('Rover general movements', () => {
   const app = new App()
   let output
   output = app.start(plateauOne)
@@ -54,4 +59,16 @@ test('Test default input: Dirty input - Spaces', () => {
 
   output = app.start(plateauTwo)
   expect(output[0]).toBe('5 2 E');
+});
+
+const plateauOutOfBounds = `5 3
+5 4 N
+LR`
+
+test('Rover placed off plateau', () => {
+  const app = new App()
+  let output
+  output = app.start(plateauOutOfBounds)
+
+  expect(output[0]).toBe('5 3 N');
 });

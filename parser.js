@@ -23,7 +23,13 @@ class Parser {
     }
 
     for (let x = 0; x < separatedCommands.length; x += 2) {
-      const parsedPosition = separatedCommands[x].trim().split(' ')
+      const trimmedPosition = separatedCommands[x].trim()
+      
+      if (trimmedPosition.length === 0) {
+        continue
+      }
+
+      const parsedPosition = trimmedPosition.split(' ')
       const { 
         roverX, 
         roverY,
